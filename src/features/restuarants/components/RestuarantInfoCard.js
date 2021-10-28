@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import { Avatar, Button, Card, Paragraph } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import star from '../../../../assets/star';
+import open from '../../../../assets/open';
 
 
 const RestuarantCard = styled(Card)`
@@ -28,10 +29,25 @@ font-size: ${props => props.theme.fontSizes.caption};
 const Info = styled(View)`
  padding: ${props => props.theme.space[3]}; 
 `;
-const Row = styled(View)`
- flex-direction: row; 
+
+const Section = styled(View)`
+    flex-direction: row; 
+    align-items: center;
+`;
+const Open = styled(SvgXml)`
+    flex-direction: row; 
 `;
 
+const Rating = styled(View)`
+ flex-direction: row; 
+ padding-top: ${props => props.theme.space[2]}; 
+ padding-bottom: ${props => props.theme.space[2]}; 
+`;
+const SectionEnd = styled(View)`
+flex: 1;
+ flex-direction: row;
+ justify-content: flex-end;
+`;
 
 export const RestuarantInfoCard = ({ restuarant = {} }) => {
     const {
@@ -52,11 +68,16 @@ export const RestuarantInfoCard = ({ restuarant = {} }) => {
                 <RestuarantCardCover key={name} source={{ uri: photos[0] }} />
                 <Info>
                     <Title>{name}</Title>
-                    <Row>
-                        {ratingArray.map(() => (
-                            <SvgXml xml={star} width={20} height={20} />
-                        ))}
-                    </Row>
+                    <Section>
+                        <Rating>
+                            {ratingArray.map(() => (
+                                <SvgXml xml={star} width={20} height={20} />
+                            ))}
+                        </Rating>
+                        <SectionEnd>
+                            {isOpenNow && <Open xml={open} width={20} height={20} />}
+                        </SectionEnd>
+                    </Section>
                     <Address>{address}</Address>
                 </Info>
             </RestuarantCard>
