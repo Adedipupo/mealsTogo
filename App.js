@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import  {RestuarantScreen}  from './src/features/restuarants/screens/restuarant-screen';
+import  {RestuarantScreen}  from './src/features/restuarants/screens/RestuarantScreen';
 
 
 export default function App() {

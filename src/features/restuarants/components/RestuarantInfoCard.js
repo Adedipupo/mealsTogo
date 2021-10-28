@@ -1,10 +1,26 @@
 import React from 'react';
-import { View, Text ,StyleSheet} from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import styled from 'styled-components/native';
+import { View, Text } from 'react-native';
+import { Avatar, Button, Card, Paragraph } from 'react-native-paper';
 
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-export const RestuarantInfo = ({ restuarant = {} }) => {
+
+
+const RestuarantCard = styled(Card)`
+        backgroundColor: #fff;
+`;
+const RestuarantCardCover = styled(Card.Cover)`
+        padding: 10px;
+        backgroundColor: white;
+`;
+
+const Title = styled(Text)`
+    padding: 16px;
+    color: red;
+`;
+
+
+export const RestuarantInfoCard = ({ restuarant = {} }) => {
 
     const {
         name = 'Hotel Apis',
@@ -19,21 +35,10 @@ export const RestuarantInfo = ({ restuarant = {} }) => {
     } = restuarant;
     return (
         <View>
-            <Card elevation={5} style={styles.card}>
-                <Card.Cover key={name} style={styles.cover} source={photos} />
-                    <Text>{name}</Text>
-            </Card>
+            <RestuarantCard elevation={5}>
+                <RestuarantCardCover key={name} source={{ uri: photos[0] }} />
+                <Title>{name}</Title>
+            </RestuarantCard>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    card: {
-        backgroundColor: '#fff',
-    },
-    cover: {
-       padding: 10,
-       backgroundColor: 'white'
-
-    }
-})
