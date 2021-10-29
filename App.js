@@ -16,11 +16,27 @@ import {
   Lato_400Regular,
 } from '@expo-google-fonts/lato';
 
+const Tab = createBottomTabNavigator();
+
+const TAB_ICON = {
+  Restaurants: "md-restaurant",
+  Map: "md-map",
+  Settings: "md-settings",
+};
+
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    ),
+  };
+};
 
 function MapScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
+      <Text>Map!</Text>
     </View>
   );
 }
@@ -33,7 +49,6 @@ function SettingsScreen() {
   );
 }
 
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -51,28 +66,13 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Tab.Navigator
-          screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'ios-home'
-                : 'ios-home-outline';
-            } else if (route.name === 'Map') {
-              iconName = focused ? 'ios-map' : 'ios-map';
-            }else if (route.name === 'Settings') {
-              iconName = focused ? 'ios-settings' : 'ios-settings';
-            }
-
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}
+            screenOptions={createScreenOptions}
+            tabBarOptions={{
+              activeTintColor: "tomato",
+              inactiveTintColor: "gray",
+            }}
           >
-            <Tab.Screen name="Home" component={RestuarantScreen} />
+            <Tab.Screen name="Restaurants" component={RestuarantScreen} />
             <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
           </Tab.Navigator>
