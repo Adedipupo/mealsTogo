@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StatusBar, StyleSheet, Text,FlatList, View, SafeAreaView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import styled from "styled-components";
 import { RestuarantInfoCard } from "../components/RestuarantInfoCard";
@@ -7,11 +7,6 @@ import { RestuarantInfoCard } from "../components/RestuarantInfoCard";
 const SafeArea = styled(SafeAreaView)`
    flex: 1;
    ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
-`;
-
-const RestuarantInfoCardContainer = styled(View)`
-   flex: 1; 
-   padding: ${props => props.theme.space[3]};
 `;
 
 const SearchContainer = styled(View)`
@@ -26,9 +21,14 @@ export const RestuarantScreen = () => {
         placeholder="e.g San Siro"
       />   
     </SearchContainer>
-    <RestuarantInfoCardContainer>
-      <RestuarantInfoCard />
-    </RestuarantInfoCardContainer>
+  
+    <FlatList 
+      data={[{name:1},{name:2},{name:3}]}
+      renderItem={() => <RestuarantInfoCard />}
+      keyExtractor={(item) => item.name}
+      contentContainerStyle={{ padding: 16 }}
+    />
+
   </SafeArea>
   )
 }
