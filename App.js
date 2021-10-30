@@ -15,6 +15,7 @@ import {
   useFonts as useLato,
   Lato_400Regular,
 } from '@expo-google-fonts/lato';
+import { restuarantRequest } from './src/services/restaurant/restaurants.service';
 
 const Tab = createBottomTabNavigator();
 
