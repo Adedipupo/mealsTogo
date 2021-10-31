@@ -16,6 +16,7 @@ import {
   Lato_400Regular,
 } from '@expo-google-fonts/lato';
 import { RestaurantsContextProvider } from './src/services/restaurant/restuarant.context';
+import { LocationContextProvider } from './src/services/location/location.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,6 +66,7 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
+      <LocationContextProvider>
         <RestaurantsContextProvider>
           <NavigationContainer>
             <Tab.Navigator
@@ -80,6 +82,7 @@ export default function App() {
             </Tab.Navigator>
           </NavigationContainer>
         </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <StatusBar style="auto" />
     </>
