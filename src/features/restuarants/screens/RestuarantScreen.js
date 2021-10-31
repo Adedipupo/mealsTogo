@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useContext} from "react";
 import { StatusBar, StyleSheet, Text,FlatList, View, SafeAreaView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import styled from "styled-components";
+import { RestaurantsContext } from "../../../services/restaurant/restuarant.context";
 import { RestuarantInfoCard } from "../components/RestuarantInfoCard";
 
 const SafeArea = styled(SafeAreaView)`
@@ -14,6 +15,8 @@ const SearchContainer = styled(View)`
 `;
 
 export const RestuarantScreen = () => {
+  const {isLoading,error,restuarants} = useContext(RestaurantsContext);
+
     return (
     <SafeArea>
     <SearchContainer>
@@ -23,8 +26,8 @@ export const RestuarantScreen = () => {
     </SearchContainer>
   
     <FlatList 
-      data={[{name:1},{name:2},{name:3}]}
-      renderItem={() => <RestuarantInfoCard />}
+      data={restuarants}
+      renderItem={({item}) => {return(<RestuarantInfoCard restuarant={item}/>)}}
       keyExtractor={(item) => item.name}
       contentContainerStyle={{ padding: 16 }}
     />
@@ -32,9 +35,3 @@ export const RestuarantScreen = () => {
   </SafeArea>
   )
 }
-
-const styles = StyleSheet.create({
-    search: {
-       
-    }
-  });
